@@ -6,27 +6,30 @@ LOG_FILE_DNS_SERVER=$LOG_DIR/doq-dns-over-quic.log
 SERVICE=dev.ctptech.vpn.mDNSResponder
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 # sudo launchctl load -w /Library/LaunchDaemons/dev.ctptech.vpn.mDNSResponder.plist
-# sudo launchctl list  | grep -i dns  
-ifconfig lo0 alias 192.168.123.9/32 up 
+# sudo launchctl list  | grep -i dns
+IP_PREFIX=192.168.123
+ifconfig lo0 alias $IP_PREFIX.9/32 up
+ifconfig lo0 alias $IP_PREFIX.8/32 up
 ifconfig lo0 alias 10.0.0.1/24 up
 function RESTART_DNS() {
 	ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs sudo kill -9
 	sudo launchctl stop $SERVICE.startup
 	sudo launchctl stop $SERVICE.reloaded
-	sudo launchctl unload  -w /Library/LaunchDaemons/$SERVICE.plist
-	sudo launchctl unload  -w /Library/LaunchDaemons/$SERVICE.startup.plist
+	sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE.plist
+	sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE.startup.plist
 	sudo launchctl load -w /Library/LaunchDaemons/$SERVICE.plist
 	sudo launchctl load -w /Library/LaunchDaemons/$SERVICE.startup.plist
 	sudo launchctl start $SERVICE.startup
 	sudo launchctl start $SERVICE.reloaded
-#	sudo launchctl restart $SERVICE.startup
-#	sudo launchctl restart $SERVICE.reloaded
 
 }
 export -f RESTART_DNS
+export EXE_BINARY=`which dnsproxy` || /Users/${USER}/Documents/GitHub/dnsproxy/dnsproxy
 if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	echo "dns starting"
-		(  /Users/charlieporth/Documents/GitHub/dnsproxy/dnsproxy --upstream quic://vpn.ctptech.dev --listen 192.168.123.9 \
+	echo "Using binary $EXE_BINARY"
+		( $EXE_BINARY  --upstream quic://vpn.ctptech.dev \ 
+			--listen $IP_PREFIX.9 --listen $IP_PREFIX.8 \
 			--cache --cache-size 168190 \
 			--fallback 35.192.105.158 --fallback 35.232.120.211 --fallback 8.8.8.8 --fallback 8.8.4.4 \
 			--port 53 --port 5053 --https-port=443 --verbose >> $LOG_FILE_DNS_SERVER.out

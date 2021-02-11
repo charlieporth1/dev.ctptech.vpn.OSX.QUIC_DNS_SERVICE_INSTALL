@@ -33,8 +33,9 @@
     <key>UserName</key>
     <string>root</string>
     <key>GroupName</key>
-    <string>root</string>
+    <string>ctptech</string>
     <key>InitGroups</key>
+    <true/>
     <key>Debug</key>
     <true/>
     <key>EnableGlobbing</key>

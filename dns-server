@@ -25,6 +25,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 		exit 123
 	fi
 	(
+		KILL_DNS
 		launchctl stop com.apple.mDNSResponder.reloaded
 		PRE_STOP_DNS
 		PRE_START_DNS

@@ -1,4 +1,8 @@
 #!/bin/bash
+MANAGER_FILE='dns-manager'
+source `which $MANAGER_FILE`
+LOAD_GO
+UPDATE_DNS_BINARY
 isRunning=`ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | grep -c '[0-9]'`
 # ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs kill -9
 LOG_DIR=/var/log
@@ -6,32 +10,28 @@ LOG_FILE_DNS_SERVER=$LOG_DIR/doq-dns-over-quic.log
 SERVICE=dev.ctptech.vpn.mDNSResponder
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 # sudo launchctl load -w /Library/LaunchDaemons/dev.ctptech.vpn.mDNSResponder.plist
-# sudo launchctl list  | grep -i dns  
-ifconfig lo0 alias 192.168.123.9/32 up 
-ifconfig lo0 alias 10.0.0.1/24 up
-function RESTART_DNS() {
-	ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs sudo kill -9
-	sudo launchctl stop $SERVICE.startup
-	sudo launchctl stop $SERVICE.reloaded
-	sudo launchctl unload  -w /Library/LaunchDaemons/$SERVICE.plist
-	sudo launchctl unload  -w /Library/LaunchDaemons/$SERVICE.startup.plist
-	sudo launchctl load -w /Library/LaunchDaemons/$SERVICE.plist
-	sudo launchctl load -w /Library/LaunchDaemons/$SERVICE.startup.plist
-	sudo launchctl start $SERVICE.startup
-	sudo launchctl start $SERVICE.reloaded
-#	sudo launchctl restart $SERVICE.startup
-#	sudo launchctl restart $SERVICE.reloaded
+# sudo launchctl list  | grep -i dns
 
-}
-export -f RESTART_DNS
+ifconfig lo0 alias 192.168.123.9/32 up
+ifconfig lo0 alias 192.168.123.8/32 up
+ifconfig lo0 alias 10.0.0.1/24 up
+
 if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	echo "dns starting"
-		(  /Users/charlieporth/Documents/GitHub/dnsproxy/dnsproxy --upstream quic://vpn.ctptech.dev --listen 192.168.123.9 \
+	DNS_BINARY="`which dnsproxy` || /Users/${USER}/dnsproxy/dnsproxy"
+	if [[ -z $DNS_BINARY ]]; then
+		echo "$DNS_BINARY DNS_BINARY not found; exiting please reinstall binary"
+		exit 1
+	fi
+		( $DNS_BINARY \
+			--upstream quic://vpn.ctptech.dev \
+			--listen 192.168.123.9 --listen 192.168.123.8 \
 			--cache --cache-size 168190 \
 			--fallback 35.192.105.158 --fallback 35.232.120.211 --fallback 8.8.8.8 --fallback 8.8.4.4 \
+			--fallback 1.1.1.1 --fallback 1.0.0.1 \
 			--port 53 --port 5053 --https-port=443 --verbose >> $LOG_FILE_DNS_SERVER.out
-
 #			--output $LOG_FILE_DNS_SERVER
-		 )>> $LOG_FILE_DNS_SERVER.out 
+		 )>>$LOG_FILE_DNS_SERVER.out
 fi
 dig www.google.com @192.168.123.9
+dig www.google.com @192.168.123.8

@@ -1,0 +1,73 @@
+#!/bin/bash
+GVM_RC="[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm"
+function LOAD_GO() {
+        declare -gx GOPATH=$HOME/go
+        declare -gx PATH=$PATH:$GOPATH/bin
+	[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm
+}
+function INSTALL_GO() {
+	[[ -z `xcode-select -p` ]] && xcode-select --install
+	[[ -z `which brew` ]] && /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	[[ -z `which gvm` ]] && brew install gvm
+	gvm install go1.15.6
+        local rc="rc"
+        local SHELL_FILE=/etc/$SHELL$rc
+        [[ -z `grep -o "$GVM_RC" /etc/profile` ]] && echo "$GVM_RC" >> /etc/profile
+        case $SHELL in
+                "bash" )
+                   [[ -z `grep -o "$GVM_RC" $SHELL_FILE` ]] && echo "$GVM_RC" >> $SHELL_FILE
+                   ;;
+                "sh" )
+                   [[ -z `grep -o "$GVM_RC" /etc/profile` ]] && echo "$GVM_RC" >> /etc/profile
+                   ;;
+                "zsh" )
+                   [[ -z `grep -o "$GVM_RC" $SHELL_FILE` ]] && echo "$GVM_RC" >> $SHELL_FILE
+                   ;;
+                "*" )
+                   [[ -z `grep -o "$GVM_RC" $SHELL_FILE` ]] && echo "$GVM_RC" >> $SHELL_FILE
+                   ;;
+        esac
+        mkdir -p $HOME/go/{bin,src}
+	LOAD_GO
+}
+function STOP_DNS() {
+        echo "Stopping dns $SERVICE"
+        ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs sudo kill -9
+        sudo launchctl stop $SERVICE.startup
+        sudo launchctl stop $SERVICE.reloaded
+        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE.plist
+        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE.startup.plist
+}
+function START_DNS(){
+        echo "Starting dns $SERVICE"
+        sudo launchctl load -w /Library/LaunchDaemons/$SERVICE.plist
+        sudo launchctl load -w /Library/LaunchDaemons/$SERVICE.startup.plist
+        sudo launchctl start $SERVICE.startup
+        sudo launchctl start $SERVICE.reloaded
+}
+function RESTART_DNS() {
+        echo "Restating dns $SERVICE"
+        STOP_DNS
+        sleep 0.500s
+        START_DNS
+}
+function LIST_DNS() {
+	sudo launchctl list | grep -i dns
+}
+function UPDATE_DNS_BINARY() {
+	go get github.com/AdguardTeam/dnsproxy
+}
+function INSTALL_DNS_BINARY() {
+	UPDATE_DNS_BINARY
+}
+export -f STOP_DNS
+export -f START_DNS
+
+export -f RESTART_DNS
+export -f LIST_DNS
+
+export -f INSTALL_GO
+export -f LOAD_GO
+
+export -f UPDATE_DNS_BINARY
+export -f INSTALL_DNS_BINARY

@@ -45,14 +45,6 @@ function INSTALL_GO() {
         mkdir -p $HOME/go/{bin,src}
 	LOAD_GO
 }
-function STOP_DNS() {
-        echo "Stopping dns $SERVICE"
-        ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs sudo kill -9
-        sudo launchctl stop $SERVICE.startup
-        sudo launchctl stop $SERVICE.reloaded
-        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
-        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
-}
 function PRE_START_DNS() {
 	(ifconfig lo0 alias 192.168.123.9/32 up)&
         ifconfig lo0 alias 192.168.123.8/32 up
@@ -61,11 +53,21 @@ function PRE_STOP_DNS() {
 	(ifconfig lo0 alias 192.168.123.9/32 down)&
         ifconfig lo0 alias 192.168.123.8/32 down
 }
+function STOP_DNS() {
+        echo "Stopping dns $SERVICE"
+        ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs sudo kill -9
+        sudo launchctl stop $SERVICE.startup
+        sudo launchctl stop $SERVICE.reloaded
+        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
+        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
+}
 function START_DNS(){
         echo "Starting dns $SERVICE"
+	sudo launchctl stop com.apple.mDNSResponder.reloaded
         sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE
         sudo launchctl start $SERVICE.startup
         sudo launchctl start $SERVICE.reloaded
+	sudo launchctl start com.apple.mDNSResponder.reloaded
 }
 function RESTART_DNS() {
         echo "Restating dns $SERVICE"

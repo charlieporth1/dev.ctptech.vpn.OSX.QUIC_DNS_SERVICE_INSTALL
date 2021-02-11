@@ -1,7 +1,8 @@
 #!/bin/bash
+SHELL=/bin/bash
 MANAGER_FILE='dns-manager'
 MANAGER_BINARY=`which $MANAGER_FILE`
-bash $MANAGER_BINARY
+source $MANAGER_BINARY
 LOAD_GO
 (UPDATE_DNS_BINARY)&
 isRunning=`ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | grep -c '[0-9]'`

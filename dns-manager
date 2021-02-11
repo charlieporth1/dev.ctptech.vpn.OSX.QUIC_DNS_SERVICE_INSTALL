@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
-SHELL=/bin/bash
+#!/bin/bash
+export SHELL=/bin/bash
+export HOME=/var/root
 echo $SHELL
 DOMAIN='dev.ctptech.vpn'
 

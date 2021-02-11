@@ -18,7 +18,7 @@ ifconfig lo0 alias 10.0.0.1/24 up
 
 if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	echo "dns starting"
-	DNS_BINARY=$( [[ -n `which dnsproxy` ]] && which dnsproxy || '')
+	DNS_BINARY=$(which dnsproxy)
 	if [[ -z $DNS_BINARY ]]; then
 		echo "$DNS_BINARY DNS_BINARY not found; exiting please reinstall binary"
 		exit 1

@@ -1,10 +1,12 @@
 #!/bin/bash
+echo $SHELL
 GVM_RC="[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm"
 function LOAD_GO() {
         export GOPATH=$HOME/go
         export PATH=$PATH:$GOPATH/bin
 	[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm
 	echo "GVM_ROOT $GVM_ROOT"
+	ls $HOME/.gvm/scripts/gvm
 }
 function INSTALL_GO() {
 	[[ -z `which gvm` ]] && bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)

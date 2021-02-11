@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 DOMAIN='dev.ctptech.vpn'
 SERVICE=$DOMAIN.dns.service
 WORKING_DIR=$HOME/$SERVICE.build

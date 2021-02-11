@@ -1,5 +1,6 @@
 #!/bin/bash
-SHELL=/bin/bash
+export SHELL=/bin/bash
+export PATH=/bin:/sbin/:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 MANAGER_FILE='dns-manager'
 MANAGER_BINARY=`which $MANAGER_FILE`
 echo $MANAGER_BINARY

@@ -12,7 +12,6 @@
 
     <key>ProgramArguments</key>
     <array>
-            <string>PATH=/bin:/sbin//usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;</string>
             <string>/bin/bash</string>
             <string>/usr/local/bin/dns-server</string>
     </array>

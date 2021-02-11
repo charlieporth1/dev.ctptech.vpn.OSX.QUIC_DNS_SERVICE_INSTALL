@@ -17,6 +17,7 @@ LOG_FILE_DNS_SERVER=$LOG_DIR/doq-dns-over-quic.log
 if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	echo "dns starting"
 	DNS_BINARY=$(which dnsproxy)
+	echo $DNS_BINARY
 	if [[ -z $DNS_BINARY ]]; then
 		echo "$DNS_BINARY DNS_BINARY not found; exiting please reinstall binary"
 		exit 123

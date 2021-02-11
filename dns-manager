@@ -5,6 +5,7 @@ DOMAIN='dev.ctptech.vpn'
 
 SERVICE="$DOMAIN.mDNSResponder.startup"
 SERVICE_FILE="$SERVICE.plist"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm
 GVM_RC="[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm"
 
 function check_root () {

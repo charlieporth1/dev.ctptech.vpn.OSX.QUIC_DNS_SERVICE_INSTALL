@@ -2,7 +2,7 @@
 DOMAIN='dev.ctptech.vpn'
 SERVICE=$DOMAIN.dns.service
 WORKING_DIR=$HOME/$SERVICE.build
-SERVICE_FILE='dev.ctptech.vpn.mDNSResponder.startup.plist'
+SERVICE_FILE="$DOMAIN.mDNSResponder.startup.plist"
 BINARY_FILE='dns-server'
 MANAGER_FILE='dns-manager'
 GVM_RC="[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm"

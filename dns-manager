@@ -49,8 +49,8 @@ function STOP_DNS() {
         ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs sudo kill -9
         sudo launchctl stop $SERVICE.startup
         sudo launchctl stop $SERVICE.reloaded
-        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE.plist
-        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE.startup.plist
+        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
+        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
 }
 function PRE_START_DNS() {
 	(ifconfig lo0 alias 192.168.123.9/32 up)&
@@ -62,8 +62,7 @@ function PRE_STOP_DNS() {
 }
 function START_DNS(){
         echo "Starting dns $SERVICE"
-        sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE.plist
-        sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE.startup.plist
+        sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE
         sudo launchctl start $SERVICE.startup
         sudo launchctl start $SERVICE.reloaded
 }

@@ -1,16 +1,23 @@
 #!/bin/bash
 export SHELL=/bin/bash
 export PATH=/bin:/sbin/:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+LOG_DIR=/var/log
+LOG_FILE_DNS=$LOG_DIR/doq-dns-over-quic.log
+
 MANAGER_FILE='dns-manager'
 MANAGER_BINARY=`which $MANAGER_FILE`
+
 echo $MANAGER_BINARY
+echo $LOG_FILE_DNS
+
 source $MANAGER_BINARY
+
 LOAD_GO
 (UPDATE_DNS_BINARY)&
+
 isRunning=`ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | grep -c '[0-9]'`
 # ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs kill -9
-LOG_DIR=/var/log
-LOG_FILE_DNS_SERVER=$LOG_DIR/doq-dns-over-quic.log
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 # sudo launchctl load -w /Library/LaunchDaemons/dev.ctptech.vpn.mDNSResponder.plist
 # sudo launchctl list | grep -i dns
@@ -35,9 +42,9 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--fallback 35.192.105.158 --fallback 35.232.120.211 --fallback 8.8.8.8 --fallback 8.8.4.4 \
 			--fallback 1.1.1.1 --fallback 1.0.0.1 \
 			--port 53 --port 5053 --https-port 443 --verbose \
- 			--output $LOG_FILE_DNS_SERVER 2>1 >> $LOG_FILE_DNS_SERVER
+ 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		launchctl start com.apple.mDNSResponder.reloaded
-	 )2>1 >> $LOG_FILE_DNS_SERVER.out
+	 )2>1 >> $LOG_FILE_DNS.out
 fi
 dig www.google.com @192.168.123.9
 dig www.google.com @192.168.123.8

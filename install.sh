@@ -37,7 +37,6 @@ chmod 777 /usr/local/bin/$MANAGER_FILE
 chmod 777 /usr/local/bin/$BINARY_FILE
 
 source /usr/local/bin/$MANAGER_FILE
-source /usr/local/bin/$BINARY_FILE
 
 RESTART_DNS
 

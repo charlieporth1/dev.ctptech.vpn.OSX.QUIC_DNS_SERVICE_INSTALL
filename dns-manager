@@ -39,6 +39,14 @@ function STOP_DNS() {
         sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE.plist
         sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE.startup.plist
 }
+function PRE_START_DNS() {
+	(ifconfig lo0 alias 192.168.123.9/32 up)&
+        ifconfig lo0 alias 192.168.123.8/32 up
+}
+function PRE_STOP_DNS() {
+	(ifconfig lo0 alias 192.168.123.9/32 down)&
+        ifconfig lo0 alias 192.168.123.8/32 down
+}
 function START_DNS(){
         echo "Starting dns $SERVICE"
         sudo launchctl load -w /Library/LaunchDaemons/$SERVICE.plist
@@ -49,7 +57,6 @@ function START_DNS(){
 function RESTART_DNS() {
         echo "Restating dns $SERVICE"
         STOP_DNS
-        sleep 0.500s
         START_DNS
 }
 function LIST_DNS() {
@@ -65,6 +72,8 @@ function UPDATE_DNS_BINARY() {
 export -f STOP_DNS
 export -f START_DNS
 
+export -f PRE_STOP_DNS
+export -f PRE_START_DNS
 export -f RESTART_DNS
 export -f LIST_DNS
 

@@ -55,11 +55,12 @@ function RESTART_DNS() {
 function LIST_DNS() {
 	sudo launchctl list | grep -i dns
 }
-function UPDATE_DNS_BINARY() {
+function INSTALL_DNS_BINARY() {
 	go get github.com/AdguardTeam/dnsproxy
 }
-function INSTALL_DNS_BINARY() {
-	UPDATE_DNS_BINARY
+function UPDATE_DNS_BINARY() {
+	INSTALL_DNS_BINARY
+#	RESTART_DNS
 }
 export -f STOP_DNS
 export -f START_DNS

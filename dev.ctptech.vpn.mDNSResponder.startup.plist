@@ -12,6 +12,7 @@
 
     <key>ProgramArguments</key>
     <array>
+            <string>/bin/bash</string>
             <string>/usr/local/bin/dns-server</string>
     </array>
 
@@ -20,10 +21,6 @@
     <key>LaunchOnlyOnce</key>        
     <true/>
     <key>RunAtLoad</key>
-    <true/>
-    <key>Debug</key>
-    <true/>
-    <key>EnableGlobbing</key>
     <true/>
 
 </dict>

@@ -10,13 +10,8 @@
     <key>StandardErrorPath</key>
     <string>/var/log/dev.ctptech.vpn.mDNSResponder.log</string>
 
- <key>ProgramArguments</key>
-  <array>
-    <string>/bin/launchctl</string>
-    <string>setenv</string>
-    <string>PATH</string>
-    <string>/usr/loca/bin:/bin/usr/local/sbin:/sbin:/usr/bin:/usr/sbin:/var/root/go/bin</string>
-  </array>
+    <key>EnableGlobbing</key>
+    <true/>
     <key>ProgramArguments</key>
     <array>
             <string>/bin/bash</string>

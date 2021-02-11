@@ -22,7 +22,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 		exit 1
 	fi
 	(
-			sudo launchctl stop com.apple.mDNSResponder.reloaded
+			#launchctl stop com.apple.mDNSResponder.reloaded
 			PRE_STOP_DNS
 			PRE_START_DNS
 			$DNS_BINARY \
@@ -32,7 +32,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--fallback 35.192.105.158 --fallback 35.232.120.211 --fallback 8.8.8.8 --fallback 8.8.4.4 \
 			--fallback 1.1.1.1 --fallback 1.0.0.1 \
 			--port 53 --port 5053 --https-port=443 --verbose >> $LOG_FILE_DNS_SERVER
-			sudo launchctl start com.apple.mDNSResponder.reloaded
+			#launchctl start com.apple.mDNSResponder.reloaded
 		 )>>$LOG_FILE_DNS_SERVER.out
 #			--output $LOG_FILE_DNS_SERVER
 fi

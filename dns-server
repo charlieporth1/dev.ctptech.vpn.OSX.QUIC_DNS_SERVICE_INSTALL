@@ -9,7 +9,6 @@ isRunning=`ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | grep -c 
 # ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs kill -9
 LOG_DIR=/var/log
 LOG_FILE_DNS_SERVER=$LOG_DIR/doq-dns-over-quic.log
-SERVICE=dev.ctptech.vpn.mDNSResponder
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 # sudo launchctl load -w /Library/LaunchDaemons/dev.ctptech.vpn.mDNSResponder.plist
 # sudo launchctl list  | grep -i dns

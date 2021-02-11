@@ -3,9 +3,8 @@ SHELL=/bin/bash
 echo $SHELL
 DOMAIN='dev.ctptech.vpn'
 
-SERVICE=$DOMAIN.dns.service
-SERVICE_FILE="$DOMAIN.mDNSResponder.startup.plist"
-
+SERVICE="$DOMAIN.mDNSResponder.startup"
+SERVICE_FILE="$SERVICE.plist"
 GVM_RC="[[ -s "$HOME/.gvm/scripts/gvm" ]] && source $HOME/.gvm/scripts/gvm"
 
 function check_root () {
@@ -62,7 +61,6 @@ function STOP_DNS() {
 	KILL_DNS
         sudo launchctl stop $SERVICE.startup
         sudo launchctl stop $SERVICE.reloaded
-        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
         sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
 }
 function START_DNS(){

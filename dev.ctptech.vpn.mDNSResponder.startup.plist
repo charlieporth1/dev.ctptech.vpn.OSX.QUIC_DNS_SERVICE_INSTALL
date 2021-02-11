@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin</string>
+    </dict>
     <key>Label</key>
     <string>dev.ctptech.vpn.mDNSResponder.startup</string> 
     
@@ -11,17 +16,25 @@
     <string>/var/log/dev.ctptech.vpn.mDNSResponder.log</string>
 
     <key>OnDemand</key>
-    <false/>
-
-
-    <key>ProgramArguments</key>
-    <array>
-            <string>bash /usr/local/bin/dns-server</string>
-    </array>
-
-    <key>RunAtLoad</key>
     <true/>
 
+    <key>Program</key>
+    <string>/usr/local/bin/dns-server</string>
+    <key>ProgramArguments</key>
+    <array>
+            <string>/usr/local/bin/dns-server</string>
+    </array>
+    <key>KeepAlive</key>
+    <true/>
+    <key>LaunchOnlyOnce</key>        
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>UserName</key>
+    <string>root</string>
+    <key>GroupName</key>
+    <string>root</string>
+    <key>InitGroups</key>
     <key>Debug</key>
     <true/>
     <key>EnableGlobbing</key>

@@ -2,7 +2,7 @@
 export SHELL=/bin/bash
 export PATH=/bin:/sbin/:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
-LOG_DIR=/var/root
+LOG_DIR=/var/log
 LOG_FILE_DNS=$LOG_DIR/doq-dns-over-quic.log
 
 MANAGER_FILE='dns-manager'
@@ -41,10 +41,11 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--cache --cache-size 168190 \
 			--fallback 35.192.105.158 --fallback 35.232.120.211 --fallback 8.8.8.8 --fallback 8.8.4.4 \
 			--fallback 1.1.1.1 --fallback 1.0.0.1 \
-			--port 53 --port 5053 --https-port 443 --verbose \
- 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
+			--port 53 --port 5053 --https-port 443 --verbose 
+# 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		launchctl start com.apple.mDNSResponder.reloaded
-	 )2>1 >> $LOG_FILE_DNS.out
+	 )
+	#2>1 >> $LOG_FILE_DNS.out
 fi
 dig www.google.com @192.168.123.9
 dig www.google.com @192.168.123.8

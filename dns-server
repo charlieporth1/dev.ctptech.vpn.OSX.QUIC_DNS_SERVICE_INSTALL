@@ -2,7 +2,7 @@
 export SHELL=/bin/bash
 export PATH=/bin:/sbin/:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
-LOG_DIR=/var/log
+LOG_DIR=/var/root
 LOG_FILE_DNS=$LOG_DIR/doq-dns-over-quic.log
 
 MANAGER_FILE='dns-manager'

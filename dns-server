@@ -33,6 +33,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	fi
 	(
 		launchctl stop com.apple.mDNSResponder.reloaded
+		sleep 1.5s
 		PRE_STOP_DNS
 		PRE_START_DNS
 		$DNS_BINARY \

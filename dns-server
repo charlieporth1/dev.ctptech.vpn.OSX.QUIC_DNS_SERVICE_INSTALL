@@ -39,7 +39,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 		$DNS_BINARY \
 			--upstream quic://vpn.ctptech.dev \
 			--listen 192.168.123.9 --listen 192.168.123.8 \
-			--cache --cache-size 168190 \
+			--cache --cache-size 2560000 --fastest-addr \
 			--fallback 35.192.105.158 --fallback 35.232.120.211 --fallback 8.8.8.8 --fallback 8.8.4.4 \
 			--fallback 1.1.1.1 --fallback 1.0.0.1 \
 			--port 53 --port 5053 --https-port 443 --verbose 

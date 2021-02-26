@@ -48,7 +48,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--fallback dns.ctptech.dev \
 			--fallback 8.8.8.8 --fallback 8.8.4.4 \
 			--fallback 1.1.1.1 --fallback 1.0.0.1 \
-			--udp-buf-size=64000 --port 53 --port 5053 \
+			--port 53 --port 5053 \
 			--all-servers --https-port 443 --verbose
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		launchctl start com.apple.mDNSResponder.reloaded

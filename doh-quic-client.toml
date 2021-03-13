@@ -1,0 +1,12 @@
+# DNS-over-HTTPS using the QUIC protocol.
+
+[resolvers.cloudflare-doh-quic]
+address = "https://vpn.ctptech.dev/dns-query"
+protocol = "doh"
+transport = "quic"
+
+[listeners.local-udp]
+address = "192.168.123.7:53"
+protocol = "udp"
+resolver = "cloudflare-doh-quic"
+

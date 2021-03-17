@@ -28,7 +28,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	EXT_IP=`curl 'https://api.ipify.org/'`
 	DNS_BINARY=$(which dnsproxy)
 	echo $DNS_BINARY
-	[[ -n $EXT_IP ]] && IS_EDNS="--edns --edns-addr=$EXT_IP" || IS_EDNS=""
+	[[ -n "$EXT_IP" ]] && IS_EDNS="--edns --edns-addr=$EXT_IP" || IS_EDNS=""
 	if [[ -z $DNS_BINARY ]]; then
 		echo "$DNS_BINARY DNS_BINARY not found; exiting please reinstall binary"
 		exit 123

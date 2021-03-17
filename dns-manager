@@ -63,15 +63,13 @@ function KILL_DNS() {
 function STOP_DNS() {
         echo "Stopping dns $SERVICE"
 	KILL_DNS
-        sudo launchctl stop $SERVICE.startup
-        sudo launchctl stop $SERVICE.reloaded
+        sudo launchctl stop $SERVICE
         sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
 }
 function START_DNS(){
         echo "Starting dns $SERVICE"
         sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE
-        sudo launchctl start $SERVICE.startup
-        sudo launchctl start $SERVICE.reloaded
+        sudo launchctl start $SERVICE
 	sudo launchctl start com.apple.mDNSResponder.reloaded
 }
 function RESTART_DNS() {

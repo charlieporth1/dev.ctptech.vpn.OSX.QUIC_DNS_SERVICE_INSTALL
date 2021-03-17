@@ -47,8 +47,8 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--bootstrap=35.192.105.158:53 --bootstrap=35.232.120.211:53 --bootstrap=54.90.63.26:53 \
 		        --bootstrap=94.140.14.14:53 --bootstrap=94.140.15.15:53 \
 			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 --fallback=54.90.63.26:53 \
-			--fallback=https://dns.adguard.com/dns-query \
 	        	--fallback=94.140.14.14:53 --fallback=94.140.15.15:53 \
+			--fallback=https://dns.adguard.com/dns-query \
         		--fallback=tls://dns.adguard.com \
         		--fallback=quic://dns.adguard.com \
 			--port=53 --port=5053 $IS_EDNS \

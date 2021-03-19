@@ -77,6 +77,12 @@ function START_DNS(){
 	dig www.google.com @192.168.123.9
 	dig www.google.com @192.168.123.8
 }
+function RESTART_DNS() {
+        echo "Restating dns $SERVICE"
+	STOP_DNS
+	START_DNS
+	START_DNS
+}
 function RETRY_RESTART() {
    local isFailed=`dig www.google.com @192.168.123.9 | grep -io "connection timed out; no servers could be reached"`
    local count=0
@@ -92,9 +98,6 @@ function RETRY_RESTART() {
 	fi
         count=$((count += 1))
    done
-}
-function RESTART_DNS() {
-        echo "Restating dns $SERVICE"
 }
 function LIST_DNS() {
 	sudo launchctl list | grep -i dns

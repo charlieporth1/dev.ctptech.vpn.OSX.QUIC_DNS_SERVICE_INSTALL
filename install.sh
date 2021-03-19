@@ -27,6 +27,7 @@ git clone $GIT_URL
 mv $WORKING_DIR/dev.ctptech.vpn.OSX.QUIC_DNS_SERVICE_INSTALL/* $WORKING_DIR
 source $WORKING_DIR/$MANAGER_FILE
 
+INSTALL
 INSTALL_GO
 INSTALL_DNS_BINARY
 
@@ -40,6 +41,7 @@ chmod 777 /usr/local/bin/$BINARY_FILE
 source /usr/local/bin/$MANAGER_FILE
 
 RESTART_DNS
+RETRY_RESTART
 
 echo "Add the DNS servers 192.168.123.9 192.168.123.8 to your dns server setting in the network tab"
 echo "Settings > Network > Network Interface (Wi-Fi) > Advanced > DNS "

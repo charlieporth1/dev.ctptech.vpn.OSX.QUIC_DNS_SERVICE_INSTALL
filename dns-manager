@@ -25,6 +25,9 @@ function LOAD_GO() {
 	echo "GVM_ROOT $GVM_ROOT"
 	ls $HOME/.gvm/scripts/gvm
 }
+function INSTALL() {
+   gem install terminal-notifier
+}
 function INSTALL_GO() {
 	[[ -z `which gvm` ]] && bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 	gvm install go1.15.6
@@ -71,11 +74,27 @@ function START_DNS(){
         sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE
         sudo launchctl start $SERVICE
 	sudo launchctl start com.apple.mDNSResponder.reloaded
+	dig www.google.com @192.168.123.9
+	dig www.google.com @192.168.123.8
+}
+function RETRY_RESTART() {
+   local isFailed=`dig www.google.com @192.168.123.9 | grep -io "connection timed out; no servers could be reached"`
+   local count=0
+   while [[ -n "$isFailed" ]]; do
+        local isFailed=`dig www.google.com @192.168.123.9 | grep -io "connection timed out; no servers could be reached"`
+	RESTART_DNS
+        if [[ $count -ge 5 ]]; then
+		echo "Exceded retry limit count: $count"
+		echo "Exceded retry limit count: $count"
+		terminal-notifier -title CTP-DNS Service -subtitle "Uh-oh!" -message "DNS Service failed to start please add 8.8.8.8 or 1.1.1.1 to your dns and contact support and notify us of this error so we can fix it asap"
+		# -appIcon 
+		break;
+	fi
+        count=$(( $count += 1 ))
+   done
 }
 function RESTART_DNS() {
         echo "Restating dns $SERVICE"
-        STOP_DNS
-        START_DNS
 }
 function LIST_DNS() {
 	sudo launchctl list | grep -i dns

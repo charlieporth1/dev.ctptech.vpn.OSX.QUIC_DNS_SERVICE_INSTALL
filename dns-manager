@@ -90,7 +90,7 @@ function RETRY_RESTART() {
 		# -appIcon 
 		break;
 	fi
-        count=$(( $count += 1 ))
+        count=$((count += 1))
    done
 }
 function RESTART_DNS() {

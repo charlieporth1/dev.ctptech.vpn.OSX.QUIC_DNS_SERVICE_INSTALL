@@ -111,7 +111,10 @@ export -f START_DNS
 
 export -f PRE_STOP_DNS
 export -f PRE_START_DNS
+
+export -f RETRY_RESTART
 export -f RESTART_DNS
+
 export -f LIST_DNS
 
 export -f INSTALL_GO

@@ -25,7 +25,7 @@ isRunning=`ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | grep -c 
 
 if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	echo "dns starting"
-	EXT_IP=`curl 'https://api.ipify.org/'`
+	EXT_IP=`timeout 4 curl -s 'https://api.ipify.org/'`
 	DNS_BINARY=$(which dnsproxy)
 	echo $DNS_BINARY
 	[[ -n "$EXT_IP" ]] && IS_EDNS="--edns --edns-addr=$EXT_IP --edns" || IS_EDNS=""

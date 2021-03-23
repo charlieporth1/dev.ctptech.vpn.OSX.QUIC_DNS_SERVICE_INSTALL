@@ -33,7 +33,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 		echo "$DNS_BINARY DNS_BINARY not found; exiting please reinstall binary"
 		exit 123
 	fi
-	(
+#	(
 		launchctl stop com.apple.mDNSResponder.reloaded
 		sleep 1.5s
                 # 268435456 Bytes is 256 MB
@@ -58,7 +58,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		launchctl start com.apple.mDNSResponder.reloaded
 		RETRY_RESTART
-	 )
+#	 )
 	#2>1 >> $LOG_FILE_DNS.out
 fi
 dig www.google.com @192.168.123.9

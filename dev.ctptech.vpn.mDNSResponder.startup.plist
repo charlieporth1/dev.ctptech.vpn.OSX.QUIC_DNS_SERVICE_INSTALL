@@ -14,11 +14,14 @@
     <array>
             <string>/bin/bash</string>
             <string>-c</string>
-            <string>'/usr/local/bin/dns-manager START_DNS'</string>
+            <string>'/usr/local/bin/dns-server'</string>
     </array>
 
     <key>KeepAlive</key>
-    <true/>
+    <dict>
+	<key>SuccessfulExit</key>
+	<false/>
+    </dict>
     <key>LaunchOnlyOnce</key>        
     <false/>
     <key>RunAtLoad</key>

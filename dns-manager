@@ -65,13 +65,13 @@ function KILL_DNS() {
 }
 function STOP_DNS() {
         echo "Stopping dns $SERVICE"
-	KILL_DNS
         sudo launchctl stop $SERVICE
-        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
+        sudo launchctl unload /Library/LaunchDaemons/$SERVICE_FILE
+	KILL_DNS
 }
 function START_DNS(){
         echo "Starting dns $SERVICE"
-        sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE
+        sudo launchctl load /Library/LaunchDaemons/$SERVICE_FILE
         sudo launchctl start $SERVICE
 	sudo launchctl start com.apple.mDNSResponder.reloaded
 	dig www.google.com @192.168.123.9
@@ -79,9 +79,20 @@ function START_DNS(){
 }
 function RESTART_DNS() {
         echo "Restating dns $SERVICE"
+#	sudo launchctl kickstart -k $SERVICE
+	STOP_DNS
+	START_DNS
 	STOP_DNS
 	START_DNS
 	START_DNS
+	START_DNS
+}
+function START_WITH_BOOT_DNS() {
+        sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE
+
+}
+function STOP_WITH_BOOT_DNS() {
+        sudo launchctl unload -w /Library/LaunchDaemons/$SERVICE_FILE
 }
 function RETRY_RESTART() {
    local isFailed=`dig www.google.com @192.168.123.9 | grep -io "connection timed out; no servers could be reached"`
@@ -89,11 +100,11 @@ function RETRY_RESTART() {
    while [[ -n "$isFailed" ]]; do
         local isFailed=`dig www.google.com @192.168.123.9 | grep -io "connection timed out; no servers could be reached"`
 	RESTART_DNS
-        if [[ $count -ge 5 ]]; then
+        if [[ $count -ge 6 ]]; then
 		echo "Exceded retry limit count: $count"
 		echo "Exceded retry limit count: $count"
 		terminal-notifier -title CTP-DNS Service -subtitle "Uh-oh!" -message "DNS Service failed to start please add 8.8.8.8 or 1.1.1.1 to your dns and contact support and notify us of this error so we can fix it asap"
-		# -appIcon 
+		# -appIcon
 		break;
 	fi
         count=$((count += 1))
@@ -128,3 +139,6 @@ export -f INSTALL_DNS_BINARY
 
 export -f check_root
 export -f KILL_DNS
+
+export -f STOP_WITH_BOOT_DNS
+export -f START_WITH_BOOT_DNS

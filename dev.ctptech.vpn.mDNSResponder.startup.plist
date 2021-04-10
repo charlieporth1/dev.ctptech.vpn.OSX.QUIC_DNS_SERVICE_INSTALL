@@ -13,15 +13,17 @@
     <key>ProgramArguments</key>
     <array>
             <string>/bin/bash</string>
-            <string>/usr/local/bin/dns-server</string>
+            <string>-c</string>
+            <string>'/usr/local/bin/dns-manager START_DNS'</string>
     </array>
 
     <key>KeepAlive</key>
-    <false/>
-    <key>LaunchOnlyOnce</key>        
     <true/>
+    <key>LaunchOnlyOnce</key>        
+    <false/>
     <key>RunAtLoad</key>
     <true/>
-
+    <key>UserName</key>
+    <string>root</string>
 </dict>
 </plist>

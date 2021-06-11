@@ -42,7 +42,8 @@ source /usr/local/bin/$MANAGER_FILE
 
 RESTART_DNS
 RETRY_RESTART
-
+networksetup -setdnsservers WiFi 192.168.123.9 192.168.123.8 174.53.130.17
+networksetup -setdnsservers Ethernet 192.168.123.9 192.168.123.8 174.53.130.17
 echo "Add the DNS servers 192.168.123.9 192.168.123.8 to your dns server setting in the network tab"
 echo "Settings > Network > Network Interface (Wi-Fi) > Advanced > DNS "
 echo "Install Complete THX for installing"

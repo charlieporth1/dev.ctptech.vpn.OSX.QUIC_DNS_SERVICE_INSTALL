@@ -28,7 +28,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	EXT_IP=`curl -s 'https://api.ipify.org/'`
 	DNS_BINARY=$(which dnsproxy)
 	echo $DNS_BINARY
-	[[ -n "$EXT_IP" ]] && IS_EDNS="--edns --edns-addr=$EXT_IP --edns" || IS_EDNS=""
+	[[ -n "$EXT_IP" ]] && IS_EDNS="--edns-addr=$EXT_IP" || IS_EDNS=""
 	if [[ -z $DNS_BINARY ]]; then
 		echo "$DNS_BINARY DNS_BINARY not found; exiting please reinstall binary"
 		exit 123
@@ -42,8 +42,8 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 		PRE_START_DNS
 		$DNS_BINARY \
 			--upstream quic://dns.ctptech.dev \
+			--upstream quic://dns.ctptech.dev:784 \
 			--upstream tls://dns.ctptech.dev \
-			--upstream tls://dns.ctptech.dev:8853 \
 			--upstream https://dns.ctptech.dev:443/dns-query \
 			--upstream https://dns.ctptech.dev:4443/dns-query \
 			--upstream https://home.dns.ctptech.dev:443/dns-query \
@@ -51,16 +51,19 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--cache --cache-size 268435456 --cache-min-ttl=600 \
 			--bootstrap=35.192.105.158:53 --bootstrap=1.1.1.1:853 \
 			--bootstrap=174.53.130.17:53 --bootstrap=35.232.120.211:53 \
-			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 --fallback=54.90.63.26:53 \
-			--fallback=174.53.130.17:53 \
+			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 \
+			--fallback=54.90.63.26:53 --fallback=174.53.130.17:53 \
+			--fallback=tls://35.192.105.158:11853 --fallback=tls://35.232.120.211:11853 \
+			--fallback=tls://54.90.63.26:11853 --fallback=tls://174.53.130.17:11853 \
 			--fallback=quic://master.dns.ctptech.dev \
+			--fallback=quic://master.dns.ctptech.dev:784 \
 			--fallback=tls://master.dns.ctptech.dev \
 			--fallback=tls://master.dns.ctptech.dev \
 			--fallback=https://master.dns.ctptech.dev:443/dns-query \
 			--fallback=https://master.dns.ctptech.dev:4443/dns-query \
 			--fallback=https://home.dns.ctptech.dev:443/dns-query \
 			--fallback=174.53.130.17:53 \
-			--port=53 --port=5053 $IS_EDNS \
+			--port=53 --port=5053 --edns $IS_EDNS \
 			--all-servers --https-port=443 --verbose
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		launchctl start com.apple.mDNSResponder.reloaded

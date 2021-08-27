@@ -50,10 +50,10 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--listen 192.168.123.9 --listen 192.168.123.8 \
 			--cache --cache-size 268435456 --cache-min-ttl=600 \
 			--bootstrap=35.192.105.158:53 --bootstrap=1.1.1.1:853 \
-			--bootstrap=174.53.130.17:53 --bootstrap=35.232.211.120:53 \
-			--fallback=35.192.105.158:53 --fallback=35.232.211.120:53 \
+			--bootstrap=174.53.130.17:53 --bootstrap=35.232.120.211:53 \
+			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 \
 			--fallback=54.90.63.26:53 --fallback=174.53.130.17:53 \
-			--fallback=tls://35.192.105.158:11853 --fallback=tls://35.232.211.120:11853 \
+			--fallback=tls://35.192.105.158:11853 --fallback=tls://35.232.120.211:11853 \
 			--fallback=tls://54.90.63.26:11853 --fallback=tls://174.53.130.17:11853 \
 			--fallback=quic://master.dns.ctptech.dev \
 			--fallback=quic://master.dns.ctptech.dev:784 \

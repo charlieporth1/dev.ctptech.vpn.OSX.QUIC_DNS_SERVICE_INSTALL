@@ -106,6 +106,7 @@ function RETRY_RESTART() {
    while [[ -n "$isFailed" ]]; do
         local isFailed=`dig www.google.com @192.168.123.9 | grep -io "connection timed out; no servers could be reached"`
 	RESTART_DNS
+	sleep 3.5s
         if [[ $count -ge 6 ]]; then
 		echo "Exceded retry limit count: $count"
 		echo "Exceded retry limit count: $count"

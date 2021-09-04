@@ -28,7 +28,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	EXT_IP=`curl -s 'https://api.ipify.org/'`
 	DNS_BINARY=$(which dnsproxy)
 	echo $DNS_BINARY
-	[[ -n "$EXT_IP" ]] && IS_EDNS="--edns-addr=$EXT_IP" || IS_EDNS=""
+	[[ -n "$EXT_IP" ]] && IS_EDNS="--edns-addr=$EXT_IP/24" || IS_EDNS=""
 	if [[ -z $DNS_BINARY ]]; then
 		echo "$DNS_BINARY DNS_BINARY not found; exiting please reinstall binary"
 		exit 123
@@ -44,9 +44,9 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--upstream quic://dns.ctptech.dev \
 			--upstream quic://dns.ctptech.dev:784 \
 			--upstream tls://dns.ctptech.dev \
-			--upstream https://dns.ctptech.dev:443/dns-query \
+			--upstream https://dns.ctptech.dev/dns-query \
 			--upstream https://dns.ctptech.dev:4443/dns-query \
-			--upstream https://home.dns.ctptech.dev:443/dns-query \
+			--upstream https://home.dns.ctptech.dev/dns-query \
 			--listen 192.168.123.9 --listen 192.168.123.8 \
 			--cache --cache-size 268435456 --cache-min-ttl=600 \
 			--bootstrap=tls://1.1.1.1 \

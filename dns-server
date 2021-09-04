@@ -51,9 +51,6 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--cache --cache-size 268435456 --cache-min-ttl=600 \
 			--bootstrap=tls://1.1.1.1 \
 			--bootstrap=tls://1.0.0.1 \
-			--bootstrap=tls://dns.google \
-			--bootstrap=tls://master.dns.ctptech.dev:11853 \
-			--bootstrap=tls://master.dns.ctptech.dev \
 			--bootstrap=1.1.1.1:53 \
 			--bootstrap=1.0.0.1:53 \
 			--bootstrap=8.8.8.8:53 \

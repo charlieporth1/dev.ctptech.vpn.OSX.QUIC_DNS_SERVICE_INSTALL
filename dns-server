@@ -52,6 +52,8 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--bootstrap=tls://1.1.1.1:853 \
 			--bootstrap=tls://1.0.0.1:853 \
 			--bootstrap=tls://dns.google:853 \
+			--bootstrap=tls://master.dns.ctptech.dev:11853 \
+			--bootstrap=tls://master.dns.ctptech.dev:853 \
 			--fallback=tls://master.dns.ctptech.dev:11853 \
 			--fallback=quic://master.dns.ctptech.dev \
 			--fallback=quic://master.dns.ctptech.dev:784 \

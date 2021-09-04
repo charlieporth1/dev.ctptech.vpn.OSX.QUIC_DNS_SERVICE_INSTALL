@@ -71,11 +71,14 @@ function STOP_DNS() {
 }
 function START_DNS(){
         echo "Starting dns $SERVICE"
+	sudo launchctl kill -9 system/com.apple.mDNSResponderHelper.reloaded
+	sudo launchctl stop com.apple.mDNSResponderHelper.reloaded
 	sudo launchctl kill -9 system/com.apple.mDNSResponder.reloaded
 	sudo launchctl stop com.apple.mDNSResponder.reloaded
 	sleep 3s
         sudo launchctl load /Library/LaunchDaemons/$SERVICE_FILE
         sudo launchctl start $SERVICE
+	sudo launchctl start com.apple.mDNSResponderHelper.reloaded
 	sudo launchctl start com.apple.mDNSResponder.reloaded
 	dig www.google.com @192.168.123.9
 	dig www.google.com @192.168.123.8

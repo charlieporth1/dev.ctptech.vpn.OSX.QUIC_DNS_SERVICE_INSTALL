@@ -64,10 +64,15 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--fallback=quic://master.dns.ctptech.dev \
 			--fallback=quic://master.dns.ctptech.dev:784 \
 			--fallback=tls://master.dns.ctptech.dev \
-			--fallback=tls://master.dns.ctptech.dev:853 \
+			--fallback=tls://gcp.ctptech.dev:853 \
+			--fallback=tls://gcp.ctptech.dev:11853 \
+			--fallback=quic://gcp.ctptech.dev \
+			--fallback=quic://gcp.ctptech.dev:784 \
+			--fallback=https://gcp.ctptech.dev:443/dns-query \
+			--fallback=https://gcp.ctptech.dev:4443/dns-query \
 			--fallback=https://master.dns.ctptech.dev:443/dns-query \
 			--fallback=https://master.dns.ctptech.dev:4443/dns-query \
-			--fallback=https://home.dns.ctptech.dev:443/dns-query \
+			--fallback=https://home.ctptech.dev:443/dns-query \
 			--fallback=54.90.63.26:53 --fallback=174.53.130.17:53 \
 			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 \
 			--port=53 --port=5053 --edns $IS_EDNS \

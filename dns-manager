@@ -75,7 +75,7 @@ function START_DNS(){
 	sudo launchctl stop com.apple.mDNSResponderHelper.reloaded
 	sudo launchctl kill -9 system/com.apple.mDNSResponder.reloaded
 	sudo launchctl stop com.apple.mDNSResponder.reloaded
-	sleep 3s
+	sleep 3
         sudo launchctl load -w /Library/LaunchDaemons/$SERVICE_FILE
         sudo launchctl start $SERVICE
 	sudo launchctl start com.apple.mDNSResponderHelper.reloaded
@@ -106,7 +106,7 @@ function RETRY_RESTART() {
    while [[ -n "$isFailed" ]]; do
         local isFailed=`dig www.google.com @192.168.123.9 | grep -io "connection timed out; no servers could be reached"`
 	RESTART_DNS
-	sleep 3.5s
+	sleep 3
         if [[ $count -ge 6 ]]; then
 		echo "Exceded retry limit count: $count"
 		echo "Exceded retry limit count: $count"
@@ -121,7 +121,7 @@ function LIST_DNS() {
 	sudo launchctl list | grep -i dns
 }
 function INSTALL_DNS_BINARY() {
-	go get github.com/AdguardTeam/dnsproxy
+	go get -u -v github.com/AdguardTeam/dnsproxy
 }
 function UPDATE_DNS_BINARY() {
 	INSTALL_DNS_BINARY

@@ -21,9 +21,9 @@ isRunning=`ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | grep -c 
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 # sudo launchctl load -w /Library/LaunchDaemons/dev.ctptech.vpn.mDNSResponder.plist
 # sudo launchctl list | grep -i dns
-killall dnsproxy
+killall -9 dnsproxy
 
-if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
+#if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	echo "dns starting"
 	EXT_IP=`curl -s 'https://api.ipify.org/'`
 	DNS_BINARY=$(which dnsproxy)
@@ -34,6 +34,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 		exit 123
 	fi
 #	(
+		launchctl stop com.apple.mDNSResponderHelper.reloaded
 		launchctl stop com.apple.mDNSResponder.reloaded
 		sleep 1
                 # 268435456 Bytes is 256 MB
@@ -61,27 +62,24 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--bootstrap=35.192.105.158:53 \
 			--bootstrap=35.232.120.211:53 \
 			--fallback=quic://master.dns.ctptech.dev \
-			--fallback=quic://master.dns.ctptech.dev:784 \
 			--fallback=tls://master.dns.ctptech.dev:11853 \
 			--fallback=tls://master.dns.ctptech.dev \
 			--fallback=tls://gcp.ctptech.dev:853 \
 			--fallback=tls://gcp.ctptech.dev:11853 \
 			--fallback=quic://gcp.ctptech.dev \
-			--fallback=quic://gcp.ctptech.dev:784 \
-			--fallback=https://gcp.ctptech.dev:443/dns-query \
 			--fallback=https://gcp.ctptech.dev:4443/dns-query \
-			--fallback=https://master.dns.ctptech.dev:443/dns-query \
 			--fallback=https://master.dns.ctptech.dev:4443/dns-query \
-			--fallback=https://home.ctptech.dev:443/dns-query \
 			--fallback=54.90.63.26:53 --fallback=174.53.130.17:53 \
 			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 \
 			--port=53 --port=5053 --edns $IS_EDNS \
 			--all-servers --https-port=443 --verbose
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
+		sleep 5
 		launchctl start com.apple.mDNSResponder.reloaded
+		launchctl start com.apple.mDNSResponderHelper.reloaded
 #		RETRY_RESTART
 #	 )
 	#2>1 >> $LOG_FILE_DNS.out
-fi
+#fi
 dig www.google.com @192.168.123.9
 dig www.google.com @192.168.123.8

@@ -52,6 +52,12 @@ function INSTALL_GO() {
 	LOAD_GO
 }
 function PRE_START_DNS() {
+	sudo sysctl -w kern.maxfilesperproc=1048576
+	sudo sysctl -w kern.maxfiles=1048600
+	sudo ulimit -S -n 1048576
+	sysctl kern.maxfilesperproc
+	sysctl kern.maxfiles
+	ulimit -S -n
 	(ifconfig lo0 alias 192.168.123.9/32 up)&
         ifconfig lo0 alias 192.168.123.8/32 up
 }

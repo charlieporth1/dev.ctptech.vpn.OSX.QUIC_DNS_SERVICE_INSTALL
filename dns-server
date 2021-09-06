@@ -34,7 +34,7 @@ killall -9 dnsproxy
 		exit 123
 	fi
 #	(
-		launchctl stop com.apple.mDNSResponderHelper.reloaded
+#		launchctl stop com.apple.mDNSResponderHelper.reloaded
 		launchctl stop com.apple.mDNSResponder.reloaded
 		sleep 1
                 # 268435456 Bytes is 256 MB
@@ -76,7 +76,7 @@ killall -9 dnsproxy
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		sleep 5
 		launchctl start com.apple.mDNSResponder.reloaded
-		launchctl start com.apple.mDNSResponderHelper.reloaded
+#		launchctl start com.apple.mDNSResponderHelper.reloaded
 #		RETRY_RESTART
 #	 )
 	#2>1 >> $LOG_FILE_DNS.out

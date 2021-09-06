@@ -14,14 +14,14 @@ echo $LOG_FILE_DNS
 source $MANAGER_BINARY
 
 LOAD_GO
-(UPDATE_DNS_BINARY)&
+UPDATE_DNS_BINARY &
 
 isRunning=`ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | grep -c '[0-9]'`
 # ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs kill -9
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 # sudo launchctl load -w /Library/LaunchDaemons/dev.ctptech.vpn.mDNSResponder.plist
 # sudo launchctl list | grep -i dns
-
+killall dnsproxy
 
 if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 	echo "dns starting"
@@ -60,9 +60,9 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--bootstrap=174.53.130.17:53 \
 			--bootstrap=35.192.105.158:53 \
 			--bootstrap=35.232.120.211:53 \
-			--fallback=tls://master.dns.ctptech.dev:11853 \
 			--fallback=quic://master.dns.ctptech.dev \
 			--fallback=quic://master.dns.ctptech.dev:784 \
+			--fallback=tls://master.dns.ctptech.dev:11853 \
 			--fallback=tls://master.dns.ctptech.dev \
 			--fallback=tls://gcp.ctptech.dev:853 \
 			--fallback=tls://gcp.ctptech.dev:11853 \
@@ -79,7 +79,7 @@ if [[ -z $isRunning ]] || [[ $isRunning -le 1 ]]; then
 			--all-servers --https-port=443 --verbose
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		launchctl start com.apple.mDNSResponder.reloaded
-		RETRY_RESTART
+#		RETRY_RESTART
 #	 )
 	#2>1 >> $LOG_FILE_DNS.out
 fi

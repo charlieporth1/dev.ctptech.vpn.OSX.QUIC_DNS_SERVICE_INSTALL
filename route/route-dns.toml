@@ -12,6 +12,6 @@ ecs-prefix6 = 64
 [groups.ctp-dns-cached]
 type = "cache"
 resolvers = [ "ctp-dns-ecs" ]
-cache-size = 50000
+cache-size = 10000
 cache-negative-ttl = 3600
 cache-answer-shuffle = "round-robin"

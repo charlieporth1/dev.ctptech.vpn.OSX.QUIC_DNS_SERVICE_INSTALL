@@ -17,6 +17,14 @@ resolvers = [
 type = "fail-back"
 resolvers = [
 	"ctp-dns-fastest",
+	"ctp-dns-fail-rotate",
+]
+servfail-error = true
+reset-after = 60
+
+[groups.ctp-dns-fail-rotate]
+type = "fail-rotate"
+resolvers = [
 	"ctp-dns_all-dot",
 	"ctp-dns_all-dtls",
 	"ctp-dns_all-doq",
@@ -28,3 +36,5 @@ resolvers = [
 	"ctp-dns_gcp-doh-post",
 	"ctp-dns_gcp-doh-get",
 ]
+servfail-error = true
+reset-after = 60

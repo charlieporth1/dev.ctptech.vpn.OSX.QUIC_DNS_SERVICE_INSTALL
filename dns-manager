@@ -128,6 +128,7 @@ function LIST_DNS() {
 }
 function INSTALL_DNS_BINARY() {
 	go get -u -v github.com/AdguardTeam/dnsproxy
+	GO111MODULE=on go get -u -v github.com/folbricht/routedns/cmd/routedns
 }
 function UPDATE_DNS_BINARY() {
 	INSTALL_DNS_BINARY

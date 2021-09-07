@@ -41,7 +41,7 @@ killall -9 dnsproxy
                 # 67108864 Bytes is 64 MB
 		PRE_STOP_DNS
 		PRE_START_DNS
-		routedns /usr/local/bin/route/*.toml --log-level=5
+		routedns /usr/local/route/*.toml --log-level=5
 #		$DNS_BINARY \
 #			--upstream quic://dns.ctptech.dev \
 #			--upstream quic://dns.ctptech.dev:784 \

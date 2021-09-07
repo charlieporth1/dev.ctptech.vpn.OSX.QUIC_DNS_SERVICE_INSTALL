@@ -1,3 +1,14 @@
+# Try UDP first, if truncated use the alernative (TCP)
+[groups.ctp-dns_all-retry]
+type = "truncate-retry"
+resolvers = [ "ctp-dns_all-dtls" ]
+retry-resolver = "ctp-dns_all-dot"
+
+[groups.ctp-dns_gcp-retry]
+type = "truncate-retry"
+resolvers = [ "ctp-dns_gcp-dtls" ]
+retry-resolver = "ctp-dns_gcp-dot"
+
 [groups.ctp-dns-fastest]
 type   = "fastest"
 resolvers = [
@@ -25,11 +36,13 @@ reset-after = 60
 [groups.ctp-dns-fail-rotate]
 type = "fail-rotate"
 resolvers = [
+	"ctp-dns_all-retry",
 	"ctp-dns_all-dot",
 	"ctp-dns_all-dtls",
 	"ctp-dns_all-doq",
 	"ctp-dns_all-doh-post",
 	"ctp-dns_all-doh-get",
+	"ctp-dns_gcp-retry",
 	"ctp-dns_gcp-dot",
 	"ctp-dns_gcp-dtls",
 	"ctp-dns_gcp-doq",

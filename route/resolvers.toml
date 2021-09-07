@@ -6,6 +6,7 @@ protocol = "dot"
 [resolvers.ctp-dns_all-dtls]
 address = "dns.ctptech.dev:853"
 protocol = "dtls"
+edns0-udp-size = 1460
 
 [resolvers.ctp-dns_all-doh-post]
 address = "https://dns.ctptech.dev:4443/dns-query"
@@ -26,7 +27,6 @@ protocol = "doh"
 transport = "quic"
 
 # GCP
-
 [resolvers.ctp-dns_gcp-dot]
 address = "gcp.ctptech.dev:853"
 protocol = "dot"
@@ -34,6 +34,7 @@ protocol = "dot"
 [resolvers.ctp-dns_gcp-dtls]
 address = "gcp.ctptech.dev:853"
 protocol = "dtls"
+edns0-udp-size = 1460
 
 [resolvers.ctp-dns_gcp-doh-post]
 address = "https://gcp.ctptech.dev:4443/dns-query"

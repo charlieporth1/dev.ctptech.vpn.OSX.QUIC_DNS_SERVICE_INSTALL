@@ -41,38 +41,39 @@ killall -9 dnsproxy
                 # 67108864 Bytes is 64 MB
 		PRE_STOP_DNS
 		PRE_START_DNS
-		$DNS_BINARY \
-			--upstream quic://dns.ctptech.dev \
-			--upstream quic://dns.ctptech.dev:784 \
-			--upstream tls://dns.ctptech.dev \
-			--upstream https://dns.ctptech.dev/dns-query \
-			--upstream https://dns.ctptech.dev:4443/dns-query \
-			--upstream https://home.ctptech.dev/dns-query \
-			--upstream quic://home.ctptech.dev \
-			--upstream tls://home.ctptech.dev \
-			--listen 192.168.123.9 --listen 192.168.123.8 \
-			--cache --cache-size 268435456 --cache-min-ttl=600 \
-			--bootstrap=tls://1.1.1.1 \
-			--bootstrap=tls://1.0.0.1 \
-			--bootstrap=1.1.1.1:53 \
-			--bootstrap=1.0.0.1:53 \
-			--bootstrap=8.8.8.8:53 \
-			--bootstrap=8.8.4.4:53 \
-			--bootstrap=174.53.130.17:53 \
-			--bootstrap=35.192.105.158:53 \
-			--bootstrap=35.232.120.211:53 \
-			--fallback=quic://master.dns.ctptech.dev \
-			--fallback=tls://master.dns.ctptech.dev:11853 \
-			--fallback=tls://master.dns.ctptech.dev \
-			--fallback=tls://gcp.ctptech.dev:853 \
-			--fallback=tls://gcp.ctptech.dev:11853 \
-			--fallback=quic://gcp.ctptech.dev \
-			--fallback=https://gcp.ctptech.dev:4443/dns-query \
-			--fallback=https://master.dns.ctptech.dev:4443/dns-query \
-			--fallback=54.90.63.26:53 --fallback=174.53.130.17:53 \
-			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 \
-			--port=53 --port=5053 --edns $IS_EDNS \
-			--all-servers --https-port=443 --verbose
+		routedns /usr/local/bin/route/*.toml --log-level=5
+#		$DNS_BINARY \
+#			--upstream quic://dns.ctptech.dev \
+#			--upstream quic://dns.ctptech.dev:784 \
+#			--upstream tls://dns.ctptech.dev \
+#			--upstream https://dns.ctptech.dev/dns-query \
+#			--upstream https://dns.ctptech.dev:4443/dns-query \
+#			--upstream https://home.ctptech.dev/dns-query \
+#			--upstream quic://home.ctptech.dev \
+#			--upstream tls://home.ctptech.dev \
+#			--listen 192.168.123.9 --listen 192.168.123.8 \
+#			--cache --cache-size 268435456 --cache-min-ttl=600 \
+#			--bootstrap=tls://1.1.1.1 \
+#			--bootstrap=tls://1.0.0.1 \
+#			--bootstrap=1.1.1.1:53 \
+#			--bootstrap=1.0.0.1:53 \
+#			--bootstrap=8.8.8.8:53 \
+#			--bootstrap=8.8.4.4:53 \
+#			--bootstrap=174.53.130.17:53 \
+#			--bootstrap=35.192.105.158:53 \
+#			--bootstrap=35.232.120.211:53 \
+#			--fallback=quic://master.dns.ctptech.dev \
+#			--fallback=tls://master.dns.ctptech.dev:11853 \
+#			--fallback=tls://master.dns.ctptech.dev \
+#			--fallback=tls://gcp.ctptech.dev:853 \
+#			--fallback=tls://gcp.ctptech.dev:11853 \
+#			--fallback=quic://gcp.ctptech.dev \
+#			--fallback=https://gcp.ctptech.dev:4443/dns-query \
+#			--fallback=https://master.dns.ctptech.dev:4443/dns-query \
+#			--fallback=54.90.63.26:53 --fallback=174.53.130.17:53 \
+#			--fallback=35.192.105.158:53 --fallback=35.232.120.211:53 \
+#			--port=53 --port=5053 --edns $IS_EDNS \
+#			--all-servers --https-port=443 --verbose
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
 		sleep 5
 		launchctl start com.apple.mDNSResponder.reloaded

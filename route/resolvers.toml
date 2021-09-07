@@ -1,0 +1,55 @@
+# ALL
+[resolvers.ctp-dns_all-dot]
+address = "dns.ctptech.dev:853"
+protocol = "dot"
+
+[resolvers.ctp-dns_all-dtls]
+address = "dns.ctptech.dev:853"
+protocol = "dtls"
+
+[resolvers.ctp-dns_all-doh-post]
+address = "https://dns.ctptech.dev:4443/dns-query"
+protocol = "doh"
+
+[resolvers.ctp-dns_all-doh-get]
+address = "https://dns.ctptech.dev:4443/dns-query"
+protocol = "doh"
+doh = { method = "GET" }
+
+[resolvers.ctp-dns_all-doq]
+address = "dns.ctptech.dev:8853"
+protocol = "doq"
+
+[resolvers.ctp-dns_all-doh-quic]
+address = "https://dns.ctptech.dev:1443/dns-query"
+protocol = "doh"
+transport = "quic"
+
+# GCP
+
+[resolvers.ctp-dns_gcp-dot]
+address = "gcp.ctptech.dev:853"
+protocol = "dot"
+
+[resolvers.ctp-dns_gcp-dtls]
+address = "gcp.ctptech.dev:853"
+protocol = "dtls"
+
+[resolvers.ctp-dns_gcp-doh-post]
+address = "https://gcp.ctptech.dev:4443/dns-query"
+protocol = "doh"
+
+[resolvers.ctp-dns_gcp-doh-get]
+address = "https://gcp.ctptech.dev:4443/dns-query"
+protocol = "doh"
+doh = { method = "GET" }
+
+[resolvers.ctp-dns_gcp-doq]
+address = "gcp.ctptech.dev:8853"
+protocol = "doq"
+
+[resolvers.ctp-dns_gcp-doh-quic]
+address = "https://gcp.ctptech.dev:1443/dns-query"
+protocol = "doh"
+transport = "quic"
+

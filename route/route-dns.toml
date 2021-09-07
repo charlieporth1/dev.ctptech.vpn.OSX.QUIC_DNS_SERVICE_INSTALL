@@ -1,0 +1,17 @@
+[bootstrap-resolver]
+address = "1.1.1.1:853"
+protocol = "dot"
+
+[groups.ctp-dns-ecs]
+type = "ecs-modifier"
+resolvers = [ "ctp-dns-fail-back" ]
+ecs-op = "privacy"
+ecs-prefix4 = 16
+ecs-prefix6 = 64
+
+[groups.ctp-dns-cached]
+type = "cache"
+resolvers = [ "ctp-dns-ecs" ]
+cache-size = 50000
+cache-negative-ttl = 3600
+cache-answer-shuffle = "round-robin"

@@ -1,0 +1,30 @@
+[groups.ctp-dns-fastest]
+type   = "fastest"
+resolvers = [
+	"ctp-dns_all-dot",
+	"ctp-dns_all-dtls",
+	"ctp-dns_all-doq",
+	"ctp-dns_all-doh-post",
+	"ctp-dns_all-doh-get",
+	"ctp-dns_gcp-dot",
+	"ctp-dns_gcp-dtls",
+	"ctp-dns_gcp-doq",
+	"ctp-dns_gcp-doh-post",
+	"ctp-dns_gcp-doh-get",
+]
+
+[groups.ctp-dns-fail-back]
+type = "fail-back"
+resolvers = [
+	"ctp-dns-fastest",
+	"ctp-dns_all-dot",
+	"ctp-dns_all-dtls",
+	"ctp-dns_all-doq",
+	"ctp-dns_all-doh-post",
+	"ctp-dns_all-doh-get",
+	"ctp-dns_gcp-dot",
+	"ctp-dns_gcp-dtls",
+	"ctp-dns_gcp-doq",
+	"ctp-dns_gcp-doh-post",
+	"ctp-dns_gcp-doh-get",
+]

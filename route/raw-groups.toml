@@ -1,0 +1,42 @@
+# Try UDP first, if truncated use the alernative (TCP)
+[groups.ctp-dns_raw-gcp-ip-1-retry]
+type = "truncate-retry"
+resolvers = [ "ctp-dns_gcp-ip-1-udp" ]
+retry-resolver = "ctp-dns_gcp-ip-1-tcp"
+
+[groups.ctp-dns_raw-gcp-ip-2-retry]
+type = "truncate-retry"
+resolvers = [ "ctp-dns_gcp-ip-2-udp" ]
+retry-resolver = "ctp-dns_gcp-ip-2-tcp"
+
+[groups.ctp-dns_raw-home-retry]
+type = "truncate-retry"
+resolvers = [ "ctp-dns_home-udp" ]
+retry-resolver = "ctp-dns_home-tcp"
+
+[groups.ctp-dns_raw-aws-retry]
+type = "truncate-retry"
+resolvers = [ "ctp-dns_aws-udp" ]
+retry-resolver = "ctp-dns_aws-tcp"
+
+
+[groups.ctp-dns-fastest-raw]
+type   = "fastest"
+resolvers = [
+	"ctp-dns_raw-gcp-ip-1-retry",
+	"ctp-dns_raw-gcp-ip-2-retry",
+	"ctp-dns_raw-home-retry",
+	"ctp-dns_raw-aws-retry",
+]
+
+[groups.ctp-dns-fail-back-raw]
+type = "fail-back"
+resolvers = [
+	"ctp-dns_raw-gcp-ip-1-retry",
+	"ctp-dns_raw-gcp-ip-2-retry",
+	"ctp-dns_raw-home-retry",
+	"ctp-dns_raw-aws-retry",
+]
+servfail-error = true
+reset-after = 60
+

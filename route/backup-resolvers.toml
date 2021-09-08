@@ -1,0 +1,37 @@
+[resolvers.google-ip-1-dot]
+address = "dns.google:853"
+protocol = "dot"
+bootstrap-address = "8.8.8.8"
+
+[resolvers.google-ip-1-dtls]
+address = "dns.google:853"
+protocol = "dtls"
+bootstrap-address = "8.8.8.8"
+
+[resolvers.google-ip-2-dot]
+address = "dns.google:853"
+protocol = "dot"
+bootstrap-address = "8.8.4.4"
+
+[resolvers.google-ip-2-dtls]
+address = "dns.google:853"
+protocol = "dtls"
+bootstrap-address = "8.8.4.4"
+
+[resolvers.cloudflare-ip-1-dot]
+address = "1.1.1.1:853"
+protocol = "dot"
+
+[resolvers.cloudflare-ip-1-dtls]
+address = "1.1.1.1:953"
+protocol = "dtls"
+
+[resolvers.cloudflare-ip-2-dot]
+address = "1.0.0.1:853"
+protocol = "dot"
+
+[resolvers.cloudflare-ip-2-dtls]
+address = "1.0.0.1:953"
+protocol = "dtls"
+
+

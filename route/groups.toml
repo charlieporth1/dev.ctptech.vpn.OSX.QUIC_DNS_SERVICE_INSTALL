@@ -29,6 +29,10 @@ type = "fail-back"
 resolvers = [
 	"ctp-dns-fastest",
 	"ctp-dns-fail-rotate",
+	"ctp-dns-fastest-raw",
+	"ctp-dns-fail-back-raw",
+	"ctp-dns-backup-fastest",
+	"ctp-dns-backup-fail-back",
 ]
 servfail-error = true
 reset-after = 60

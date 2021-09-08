@@ -1,0 +1,40 @@
+[groups.ctp-dns_google-ip-1-retry]
+type = "truncate-retry"
+resolvers = [ "google-ip-1-dtls" ]
+retry-resolver = "google-ip-1-dot"
+
+[groups.ctp-dns_google-ip-2-retry]
+type = "truncate-retry"
+resolvers = [ "google-ip-2-dtls" ]
+retry-resolver = "google-ip-2-dot"
+
+[groups.ctp-dns_cloudflare-ip-1-retry]
+type = "truncate-retry"
+resolvers = [ "cloudflare-ip-1-dtls" ]
+retry-resolver = "cloudflare-ip-1-dot"
+
+[groups.ctp-dns_cloudflare-ip-2-retry]
+type = "truncate-retry"
+resolvers = [ "cloudflare-ip-2-dtls" ]
+retry-resolver = "cloudflare-ip-2-dot"
+
+
+[groups.ctp-dns-backup-fastest]
+type   = "fastest"
+resolvers = [
+	"ctp-dns_google-ip-1-retry",
+	"ctp-dns_google-ip-2-retry",
+	"ctp-dns_cloudflare-ip-1-retry",
+	"ctp-dns_cloudflare-ip-2-retry",
+]
+
+[groups.ctp-dns-backup-fail-back]
+type = "fail-back"
+resolvers = [
+	"ctp-dns_google-ip-1-retry",
+	"ctp-dns_google-ip-2-retry",
+	"ctp-dns_cloudflare-ip-1-retry",
+	"ctp-dns_cloudflare-ip-2-retry",
+]
+servfail-error = true
+reset-after = 60

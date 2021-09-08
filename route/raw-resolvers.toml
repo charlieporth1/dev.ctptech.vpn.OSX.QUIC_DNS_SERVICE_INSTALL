@@ -1,0 +1,31 @@
+[resolvers.ctp-dns_gcp-ip-1-tcp]
+address = "35.192.105.158:53"
+protocol = "tcp"
+
+[resolvers.ctp-dns_gcp-ip-1-udp]
+address = "35.192.105.158:53"
+protocol = "udp"
+
+[resolvers.ctp-dns_gcp-ip-2-tcp]
+address = "35.232.120.211:53"
+protocol = "tcp"
+
+[resolvers.ctp-dns_gcp-ip-2-udp]
+address = "35.232.120.211:53"
+protocol = "udp"
+
+[resolvers.ctp-dns_home-tcp]
+address = "174.53.130.17:53"
+protocol = "tcp"
+
+[resolvers.ctp-dns_home-udp]
+address = "174.53.130.17:53"
+protocol = "udp"
+
+[resolvers.ctp-dns_aws-tcp]
+address = "54.90.63.26:53"
+protocol = "tcp"
+
+[resolvers.ctp-dns_aws-udp]
+address = "54.90.63.26:53"
+protocol = "udp"

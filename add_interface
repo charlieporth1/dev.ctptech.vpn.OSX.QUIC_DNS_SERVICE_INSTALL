@@ -1,0 +1,12 @@
+#!/bin/zsh
+[[ "$UID" -ne "0" ]] && echo "You must be root. Goodbye..." && exit 1
+ifname="vlan${1}"
+ifname=${ifname}
+ip_address="$2"
+subnet="$3"
+echo "starting"
+sudo ifconfig $ifname create && echo $ifname created
+sudo ifconfig $ifname inet $ip_address netmask 255.255.255.255 && echo $ifname configured
+sudo ifconfig $ifname up
+ping -c1 $ip_address
+echo "ending"

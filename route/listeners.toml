@@ -1,19 +1,19 @@
 [listeners.local-udp-1]
-address = "192.168.123.9:53"
+address = "169.254.1.1:53"
 protocol = "udp"
 resolver = "ctp-dns-cached"
 
 [listeners.local-tcp-1]
-address = "192.168.123.9:53"
+address = "169.254.1.1:53"
 protocol = "tcp"
 resolver = "ctp-dns-cached"
 
 [listeners.local-udp-2]
-address = "192.168.123.8:53"
+address = "169.254.1.2:53"
 protocol = "udp"
 resolver = "ctp-dns-cached"
 
 [listeners.local-tcp-2]
-address = "192.168.123.8:53"
+address = "169.254.1.2:53"
 protocol = "tcp"
 resolver = "ctp-dns-cached"

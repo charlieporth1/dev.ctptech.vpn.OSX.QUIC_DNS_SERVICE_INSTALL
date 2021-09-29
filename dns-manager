@@ -58,12 +58,17 @@ function PRE_START_DNS() {
 	sysctl kern.maxfilesperproc
 	sysctl kern.maxfiles
 	ulimit -S -n
-	(ifconfig lo0 alias 192.168.123.9/32 up)&
-        ifconfig lo0 alias 192.168.123.8/32 up
+	add_interface 0 169.254.1.1
+	add_interface 1 169.254.1.2
+	add_interface 2 192.168.123.1
+	add_interface 3 192.168.123.2
+	add_interface 4 192.168.123.3
+	add_interface 5 192.168.123.4
 }
 function PRE_STOP_DNS() {
-	(ifconfig lo0 alias 192.168.123.9/32 down)&
-        ifconfig lo0 alias 192.168.123.8/32 down
+	add_interface 2 192.168.123.1
+	add_interface 3 192.168.123.2
+ #       ifconfig lo0 alias 192.168.123.8/32 down
 }
 function KILL_DNS() {
         ps -ax | grep dnsproxy | grep -v 'grep' | awk '{print $1}' | xargs sudo kill -9

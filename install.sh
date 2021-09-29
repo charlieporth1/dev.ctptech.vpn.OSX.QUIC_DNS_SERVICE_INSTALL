@@ -34,6 +34,7 @@ ln -s $WORKING_DIR/route /usr/local/
 ln -s $WORKING_DIR/$SERVICE_FILE /Library/LaunchDaemons/$SERVICE_FILE
 ln -s $WORKING_DIR/$MANAGER_FILE /usr/local/bin/$MANAGER_FILE
 ln -s $WORKING_DIR/$BINARY_FILE /usr/local/bin/$BINARY_FILE
+ln -s $WORKING_DIR/add_interface /usr/local/bin/add_interface
 
 chmod 777 /usr/local/bin/$MANAGER_FILE
 chmod 777 /usr/local/bin/$BINARY_FILE

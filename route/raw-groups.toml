@@ -36,6 +36,12 @@ resolvers = [
 	"ctp-dns_raw-gcp-ip-2-retry",
 	"ctp-dns_raw-home-retry",
 	"ctp-dns_raw-aws-retry",
+	"ctp-dns_gcp-ip-1-udp",
+	"ctp-dns_gcp-ip-1-tcp",
+	"ctp-dns_home-udp",
+	"ctp-dns_home-tcp",
+	"ctp-dns_aws-udp",
+	"ctp-dns_aws-tcp",
 ]
 servfail-error = true
 reset-after = 60

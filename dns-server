@@ -75,7 +75,7 @@ killall -9 dnsproxy
 #			--port=53 --port=5053 --edns $IS_EDNS \
 #			--all-servers --https-port=443 --verbose
 # 			--output $LOG_FILE_DNS 2>1 >> $LOG_FILE_DNS
-		sleep 5
+		sleep 1
 		launchctl start com.apple.mDNSResponder.reloaded
 #		launchctl start com.apple.mDNSResponderHelper.reloaded
 #		RETRY_RESTART

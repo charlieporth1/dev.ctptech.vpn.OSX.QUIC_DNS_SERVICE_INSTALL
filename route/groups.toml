@@ -33,9 +33,9 @@ resolvers = [
 	"ctp-dns-fail-back-raw",
 	"ctp-dns-backup-fastest",
 	"ctp-dns-backup-fail-back",
+	"ctp-dns_gcp-dtls",
+	"ctp-dns_gcp-dot",
 ]
-servfail-error = true
-reset-after = 60
 
 [groups.ctp-dns-fail-rotate]
 type = "fail-rotate"
@@ -46,6 +46,8 @@ resolvers = [
 	"ctp-dns_all-doq",
 	"ctp-dns_all-doh-post",
 	"ctp-dns_all-doh-get",
+	"ctp-dns_all-dtls"
+	"ctp-dns_all-dot",
 	"ctp-dns_gcp-retry",
 	"ctp-dns_gcp-dot",
 	"ctp-dns_gcp-dtls",

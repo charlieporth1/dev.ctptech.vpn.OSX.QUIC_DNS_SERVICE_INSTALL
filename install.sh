@@ -38,6 +38,7 @@ ln -s $WORKING_DIR/add_interface /usr/local/bin/add_interface
 
 chmod 777 /usr/local/bin/$MANAGER_FILE
 chmod 777 /usr/local/bin/$BINARY_FILE
+chmod 777 /usr/local/bin/add_interface
 
 source /usr/local/bin/$MANAGER_FILE
 
